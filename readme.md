@@ -87,3 +87,23 @@ would equal global.  This is called hoisting in javascript
 */
 ```
 
+Great example of using Module pattern to create a class like clone in JS:
+```javascript
+var users = function() {
+  var knownUsers = [];
+
+  return {
+    addUser: function(name) {
+      knownUsers.push(name);
+    },
+    mostRecentUser: function() {
+      return knownUsers[knownUsers.length - 1];
+    }
+  }
+}();
+
+users.addUser("Barney Rubble");
+users.addUser("Wilma Flintstone");
+console.log(users.mostRecentUser());
+```
+
