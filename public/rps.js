@@ -3,6 +3,10 @@ window.RPS = {
   Views: {}
 }
 
+////////////
+// Models //
+////////////
+
 window.RPS.Models.Player = function(name) {
   this.that = this;
   this.name = name;
@@ -43,8 +47,27 @@ window.RPS.Models.ScoreCalculator = function(player_choice, computer_choice) {
   }
 }
 
+////////////
+// Views ///
+////////////
 
-// Sanity check for creating JS objects
+window.RPS.Views.Piece = function(typeOfPiece) {
+  this.name = typeOfPiece;
+
+  this.makePiece = function() {
+    var $img = $('<img>').attr({
+      src: this.name + '.png',
+      id: 'newpiece'
+    });
+    return $img;
+  }
+}
+
+// Playing Game
+var rock = new window.RPS.Views.Piece('rock');
+var rockImage = rock.makePiece();
+$('body').append(rockImage);
+
 var player = new window.RPS.Models.Player("spencer");
 var computer = new window.RPS.Models.Computer();
 
