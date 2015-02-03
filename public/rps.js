@@ -57,8 +57,8 @@ window.RPS.Views.GameBoard = function(playerDiv, computerDiv) {
 
   this.buildGame = function () {
     var gameContainer = $('<div>').attr('id', 'gameContainer');
-    gameContainer.append(this.player);
-    gameContainer.append(this.computer);
+    gameContainer.append(this.player.div);
+    gameContainer.append(this.computer.div);
     $('body').append(gameContainer);
   }
   this.buildGame();
@@ -90,7 +90,7 @@ window.RPS.Views.PieceDiv = function(rock, paper, scissors, player) {
     }
     return this.div;
   }
-  return this.buildDiv();
+  this.buildDiv();
 }
 
 window.RPS.Views.Piece = function(typeOfPiece, player) {
