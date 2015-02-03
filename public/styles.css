@@ -1,0 +1,16 @@
+#gameContainer {
+  width: 800px;
+  height: 800px;
+  margin: 0 auto;
+  background: gray;
+}
+
+#spencer {
+  display: inline-block;
+  float: left;
+}
+
+#Computer {
+  display: inline-block;
+  float: right;
+}

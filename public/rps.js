@@ -51,33 +51,98 @@ window.RPS.Models.ScoreCalculator = function(player_choice, computer_choice) {
 // Views ///
 ////////////
 
-window.RPS.Views.Piece = function(typeOfPiece) {
+window.RPS.Views.GameBoard = function(playerDiv, computerDiv) {
+  this.player = playerDiv;
+  this.computer = computerDiv;
+
+  this.buildGame = function () {
+    var gameContainer = $('<div>').attr('id', 'gameContainer');
+    gameContainer.append(this.player);
+    gameContainer.append(this.computer);
+    $('body').append(gameContainer);
+  }
+  this.buildGame();
+  this.putListeners = function () {
+    var pieces = ["rock", "paper", "scissors"];
+
+    for(i = 0; i < pieces.length; i++) {
+      $('#' + pieces[i] + '-' + player.name).on('click', function() {
+        player.getChoice();
+      });
+    }
+  }
+  this.putListeners();
+}
+
+window.RPS.Views.PieceDiv = function(rock, paper, scissors, player) {
+  this.rock = rock;
+  this.paper = paper;
+  this.scissors = scissors;
+  this.div = $('<div>').attr({id: player.name});
+
+  this.buildDiv = function() {
+    var pieces = [this.rock.makePiece(),
+                  this.paper.makePiece(),
+                  this.scissors.makePiece()];
+
+    for(i = 0; i < pieces.length; i++) {
+      this.div.append(pieces[i]);
+    }
+    return this.div;
+  }
+  return this.buildDiv();
+}
+
+window.RPS.Views.Piece = function(typeOfPiece, player) {
+  this.player = player
   this.name = typeOfPiece;
 
   this.makePiece = function() {
     var $img = $('<img>').attr({
-      src: this.name + '.png',
-      id: 'newpiece'
+      src: '/img/' + this.name + '.png',
+      id: this.name + '-' + this.player.name
     });
     return $img;
   }
 }
 
 // Playing Game
-var rock = new window.RPS.Views.Piece('rock');
-var rockImage = rock.makePiece();
-$('body').append(rockImage);
-
 var player = new window.RPS.Models.Player("spencer");
 var computer = new window.RPS.Models.Computer();
 
-player.getChoice();
-console.log(player.choice);
+// Player Pieces
+var rock = new window.RPS.Views.Piece('rock', player);
+var paper = new window.RPS.Views.Piece('paper', player);
+var scissors = new window.RPS.Views.Piece('scissors', player);
+var playerDiv = new window.RPS.Views.PieceDiv(rock, paper, scissors, player);
 
-computer.getChoice();
-console.log(computer.choice);
+// Computer Pieces
+var rockCPU = new window.RPS.Views.Piece('rock', computer);
+var paperCPU = new window.RPS.Views.Piece('paper', computer);
+var scissorsCPU = new window.RPS.Views.Piece('scissors', computer);
+var computerDiv = new window.RPS.Views.PieceDiv(rockCPU, paperCPU, scissorsCPU, computer);
 
-var calc = new window.RPS.Models.ScoreCalculator(player.choice, computer.choice);
+// $('body').append(playerDiv);
+// $('body').append(computerDiv);
+// Gameboard
+var gameboard = new window.RPS.Views.GameBoard(playerDiv, computerDiv);
 
-console.log(calc.findWinner());
+// Double checking
+// var rockImage = rock.makePiece();
+// var paperImage = paper.makePiece();
+// var scissorsImage = scissors.makePiece();
+// $('body').append(rockImage);
+// $('body').append(paperImage);
+// $('body').append(scissorsImage);
 
+//
+// player.getChoice();
+// console.log(player.choice);
+//
+// computer.getChoice();
+// console.log(computer.choice);
+//
+// var calc = new window.RPS.Models.ScoreCalculator(player.choice, computer.choice);
+//
+// console.log(calc.findWinner());
+//
