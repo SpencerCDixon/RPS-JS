@@ -62,6 +62,8 @@ window.RPS.Views.GameBoard = function(playerDiv, computerDiv) {
     $('body').append(gameContainer);
   }
   this.buildGame();
+
+  // This needs to be changed, probably isn't properly set up
   this.putListeners = function () {
     var pieces = ["rock", "paper", "scissors"];
 
