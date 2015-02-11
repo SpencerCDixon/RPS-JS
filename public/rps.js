@@ -1,6 +1,7 @@
 window.RPS = {
   Models: {},
-  Views: {}
+  Views: {},
+  Controller: {}
 }
 
 ////////////
@@ -37,9 +38,9 @@ window.RPS.Models.ScoreCalculator = function(player_choice, computer_choice) {
       return "Tie game"
     } else if (this.player === "r" && this.computer === "s") {
       return "Player wins"
-    } else if (this.player === "s" && this.computer === "p") { 
+    } else if (this.player === "s" && this.computer === "p") {
       return "Player wins"
-    } else if (this.player === "p" && this.computer === "r") { 
+    } else if (this.player === "p" && this.computer === "r") {
       return "Player wins"
     } else {
       return "Computer wins"
